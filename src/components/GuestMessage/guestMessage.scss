@@ -1,0 +1,61 @@
+.guest-service{
+    text-align: left;
+    margin: 15px 0;
+    position: relative;
+    width: 600px;
+    .item-photo{
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        position: absolute;
+        top: -13px;
+        left: -8px;
+        text-align: center;
+        .item-avatar{
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-image: url(../../assign/images/agent.png);
+        }
+    }
+    .content::before{
+        content: ' ';
+        width: 20px;
+        height: 17px;
+        position: absolute;
+        display: inline-block;
+        left: -12px;
+        background: url('../../assign/images/iconR.png') no-repeat;
+        background-size: cover;
+    }
+    .content{
+        max-width: 540px;
+        padding: 12px;
+        border-radius: 8px;
+        display: inline-block;
+        position: relative;
+        margin: 0 10px;
+        vertical-align: top;
+        line-height: 1.5;
+        word-break: break-word;
+        font-size: 13px;
+        background: #fff;
+        margin-left: 50px;
+        .ctn-answer{
+            transition: height .5s;
+            position: relative;
+            min-height: 21px;
+        }
+        .loading{
+            background-image: url("../../assign//images/b5e7b41d3d5e1a7549ed8dae0e10f26d.gif");
+            width: 30px;
+            height: 30px;
+            background-size: 100% 100%;
+        }
+    }
+}
+@media (max-width:728px) {
+    .guest-service{
+        width: 100%;
+    }    
+}

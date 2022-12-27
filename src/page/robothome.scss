@@ -1,0 +1,28 @@
+.robot-body{
+    padding-top: 70px;
+    .robot-container{
+        width: 1200px;
+    padding: 10px 20px;
+    background: #fff;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+    padding-right: 360px;
+    }
+    .container-fluid-1200::before{
+        content: " ";
+        display: table;
+    }
+    .container-fluid-1200{
+        max-width: 1220px;
+        
+    }
+    @media (max-width:728px) {
+        .robot-container{
+            width: 100%;
+            padding:0;
+        padding-right: 0;
+        margin: 0 auto;
+        }
+    }
+}

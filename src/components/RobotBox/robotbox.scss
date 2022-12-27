@@ -1,0 +1,14 @@
+.robot-ctn{
+    background: #f6f6f6;
+    margin: 0 -20px;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    padding-bottom: 0;
+    ul{
+        padding-bottom: 30px;
+    }
+}

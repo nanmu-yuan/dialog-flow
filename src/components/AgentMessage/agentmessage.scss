@@ -1,0 +1,42 @@
+.item-user{
+    text-align: right;
+    margin: 10px 0;
+    position: relative;
+    .content::before{
+        content: ' ';
+    width: 20px;
+    height: 17px;
+    position: absolute;
+    display: inline-block;
+    right: -12px;
+    background: url(../../assign/images/robot_dialogue22-e8a8300a16.png) no-repeat;
+    background-size: cover;
+    }
+    .content{
+        max-width: 540px;
+        padding: 12px;
+        border-radius: 8px;
+        display: inline-block;
+        position: relative;
+        margin: 0 10px;
+        vertical-align: top;
+        line-height: 1.5;
+        word-break: break-word;
+        font-size: 13px;
+        text-align: left;
+        background: #e5e5e5;
+        margin-right: 50px;
+    }
+    .user-avatar{
+        width: 36px;
+    height: 36px;
+    background-size: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    right: 4px;
+    background-repeat: no-repeat;
+    border: 1px solid #e5e5e5;
+    background-image: url(../../assign/images/default_avatar.png);
+    }
+}
