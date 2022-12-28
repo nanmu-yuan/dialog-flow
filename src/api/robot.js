@@ -1,5 +1,6 @@
 import * as axiosBase from './index'
 
+const siteName = window.location.href.split("index/")[1];
 export const queryImagePath =(params)=>{
     params = params || {};
     return axiosBase.get('/api/xxx',params)
@@ -35,7 +36,7 @@ export const CallBack =(data)=>{
                     "name": "projects/customer-370905/agent/sessions/1234567891/contexts/Site",
                     "lifespanCount": 2,
                     "parameters":{
-                        "siteName": "ab.com"
+                        "siteName": siteName
                     }
                 }
             ]
@@ -57,7 +58,7 @@ export const RobotCallBack =(data)=>{
                     "name": "projects/customer-370905/agent/sessions/1234567891/contexts/Site",
                     "lifespanCount": 2,
                     "parameters":{
-                        "siteName": "ab.com"
+                        "siteName": siteName
                     }
                 }
             ]
@@ -66,5 +67,5 @@ export const RobotCallBack =(data)=>{
     return axiosBase.post('https://dialogflow.googleapis.com/v2/projects/customer-370905/agent/sessions/*:detectIntent',params)
 }
 export const getToken =()=>{
-    return axiosBase.get('http://www.allindesk.com/cs/ggtoken',null)
+    return axiosBase.get('https://www.allindesk.com/cs/ggtoken',null)
 }

@@ -17,12 +17,10 @@ const RobotBox=(props)=>{
     const [height,setDefaultHeight] = useState(defaultHeight);
     const RobotState = useContext(RobotStateContext);
     const newList = JSON.parse(window.localStorage.getItem('robot'))||[]
-    
     useEffect(()=>{
         window.addEventListener('resize',()=>{
             setDefaultHeight(document.documentElement.clientHeight-calcNum)
         })
-       // console.log(messageViewBox.current.clientHeight,messageView.current.clientHeight,messageView.current.scrollTop)
        messageViewBox.current.scrollTop =  messageView.current.scrollHeight+20;
     }) 
         return(

@@ -5,6 +5,8 @@ import { getToken } from '../api/robot';
 const service = new axios.create({
     baseURL:'/',
     timeout:'1000*60',
+    retry: 2, //设置全局重试请求次数（最多重试几次请求）
+    retryDelay: 1000, //设置全局请求间隔
     headers:{
         "Content-Type":'application/json;charset=UTF-8'
     }
@@ -29,7 +31,21 @@ service.interceptors.response.use((res)=>{
             window.localStorage.setItem('robotToken',token)
         })
     }
-   return Promise.reject(error)
+    let config = error.config;
+    if(!config || !config.retry) return Promise.reject(error);
+    config.__retryCount = config.__retryCount || 0;
+    if(config.__retryCount >= config.retry){
+        return Promise.reject(error);
+    }
+    config.__retryCount += 1;
+    let backOff = new Promise((resolve)=>{
+        setTimeout(()=>{
+            resolve()
+        },config.retryDelay || 1)
+    }) 
+    return backOff.then(()=>{
+        return service(config)
+    })
 })
 
 export default service

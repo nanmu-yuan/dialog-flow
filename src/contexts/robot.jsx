@@ -1,5 +1,5 @@
-import { createContext, useEffect, useReducer } from "react"
-import { CallBackMessage,getToken,CallBack,RobotCallBack} from "../api/robot";
+import { createContext, useReducer } from "react"
+import { CallBack} from "../api/robot";
 export const RobotStateContext = createContext();
 export const RobotDispatchContext = createContext();
 
@@ -19,6 +19,7 @@ const reducer = (state, action) => {
                     outputMessage:action.payload,
                 }]
             }
+
             const cache = JSON.parse(window.localStorage.getItem('robot'));
             if(cache){
                 const newList = cache.concat(mes.context);
@@ -47,20 +48,21 @@ const RobotProvider = ({ children }) => {
     )
 }
 export const inputToRobot=(dispatch,data)=>{
-    queryRobotCallBackMessage(data,dispatch)
-    return dispatch({
+    dispatch({
         type:'INPUT_TO_ROBOT',
         payload:data
     })
+    queryRobotCallBackMessage(data,dispatch)
 }
-export const queryOrder = (dispatch)=>{
+export const DealOrder = (mes,dispatch)=>{
+    console.log(`快捷方式`)
     dispatch({
         type:'INPUT_TO_ROBOT',
-        payload:'Tracking'
+        payload:mes
     })
-    CallBack('order').then(res=>{
+    CallBack(mes).then(res=>{
         const output = res.queryResult.fulfillmentText;
-        return dispatch({
+         dispatch({
             type:'FROM_TO_ROBOT',
             payload:output
            })
@@ -70,7 +72,7 @@ const queryRobotCallBackMessage = (inputData,dispatch)=>{
 
     CallBack(inputData).then(res=>{
         const output = res.queryResult.fulfillmentText;
-        return dispatch({
+       dispatch({
             type:'FROM_TO_ROBOT',
             payload:output
            })
