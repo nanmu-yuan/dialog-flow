@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { RobotDispatchContext,inputToRobot,DealOrder } from "../../contexts/robot";
+import React, { useContext, useRef, useState } from "react";
+import { RobotDispatchContext,inputToRobot, } from "../../contexts/robot";
 import './robotfooter.scss'
 const initAction = {
     inputData: '',
@@ -29,29 +29,31 @@ const RobotFooter = () => {
         })
     }
     const order = (e)=>{
-        const mes = e.target.innerText;
-        DealOrder('order',robotDispatch)
+        let mes = e.target.innerText;
+        setTimeout(() => {
+            inputToRobot(robotDispatch,mes)
+        })
         inputRef.current.focus()
         
     }
-    useEffect(()=>{
-            document.onkeydown = (e) => {
-                if (e.key === 'Enter') {
-                   change()
-                }
-            }
-        
-    },[initState])
+    const keyUp = (e)=>{
+       
+        if(e.keyCode == 13){
+           setTimeout(()=>{
+            change()
+           })
+        }
+    }
         return (
             <div className="robot-footer">
                 <div className="robot-associate">
                     <ul>
-                        <li onClick={order}>Tracking</li>
-                      
+                        <li onClick={order}>Track order</li>
+                        <li onClick={order}>Cancel order</li>
                     </ul>
                 </div>
                 <div className="robot-search">
-                    <input value={initState.inputData} ref={inputRef} onInput={input} placeholder="Type your message briefly here" className="robot-search-input message-input"></input>
+                    <input value={initState.inputData} ref={inputRef} onInput={input} onKeyUp = {keyUp} placeholder="Type your message briefly here" className="robot-search-input message-input"></input>
                     <button className="robot-input-btn" disabled={initState.disabled}  onClick={change} >Enter</button>
                 </div>
             </div>

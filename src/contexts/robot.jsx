@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react"
+import { createContext, useEffect, useReducer } from "react"
 import { CallBack} from "../api/robot";
 export const RobotStateContext = createContext();
 export const RobotDispatchContext = createContext();
@@ -9,7 +9,7 @@ const reducer = (state, action) => {
             return{
                 context:[{
                     outputMessage:'...',
-                    inputMessage:action.payload,
+                    inputMessage:action.payload
                 }]
             }
         case 'FROM_TO_ROBOT':
@@ -17,15 +17,19 @@ const reducer = (state, action) => {
                 context:[{
                     ...state.context[0],
                     outputMessage:action.payload,
-                }]
+                }],
+          
             }
 
             const cache = JSON.parse(window.localStorage.getItem('robot'));
             if(cache){
                 const newList = cache.concat(mes.context);
+           
                 window.localStorage.setItem('robot',JSON.stringify(newList));
+               
             }else{
                 window.localStorage.setItem('robot',JSON.stringify(mes.context))
+              
             }
             return mes
         default:
@@ -35,7 +39,8 @@ const reducer = (state, action) => {
 
 const RobotProvider = ({ children }) => {
     const initRobotData = {
-        context:[]
+        context:[],
+
     };
     const [state, dispatch] = useReducer(reducer, initRobotData);
     return (
@@ -48,25 +53,12 @@ const RobotProvider = ({ children }) => {
     )
 }
 export const inputToRobot=(dispatch,data)=>{
+    queryRobotCallBackMessage(data,dispatch)
     dispatch({
         type:'INPUT_TO_ROBOT',
         payload:data
     })
-    queryRobotCallBackMessage(data,dispatch)
-}
-export const DealOrder = (mes,dispatch)=>{
-    console.log(`快捷方式`)
-    dispatch({
-        type:'INPUT_TO_ROBOT',
-        payload:mes
-    })
-    CallBack(mes).then(res=>{
-        const output = res.queryResult.fulfillmentText;
-         dispatch({
-            type:'FROM_TO_ROBOT',
-            payload:output
-           })
-    })
+   
 }
 const queryRobotCallBackMessage = (inputData,dispatch)=>{
 

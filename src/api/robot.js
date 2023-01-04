@@ -36,7 +36,7 @@ export const CallBack =(data)=>{
                     "name": "projects/customer-370905/agent/sessions/1234567891/contexts/Site",
                     "lifespanCount": 2,
                     "parameters":{
-                        "siteName": siteName
+                        "siteName": siteName|| 'berrylook'
                     }
                 }
             ]

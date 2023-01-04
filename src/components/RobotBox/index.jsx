@@ -3,29 +3,25 @@ import { RobotStateContext } from "../../contexts/robot";
 import './robotbox.scss'
 import GuestMessage from "../GuestMessage";
 import AgentMessage from "../AgentMessage";
-import { IsPC } from "../../utils/agent";
-let calcNum = ''
-if(IsPC()){
-    calcNum = 250
-}else{
-    calcNum = 320
-}
-const defaultHeight=document.documentElement.clientHeight-calcNum
+import Help from "../Help";
+
+
 const RobotBox=(props)=>{
     const messageView = useRef(null);
     const messageViewBox = useRef(null);
-    const [height,setDefaultHeight] = useState(defaultHeight);
-    const RobotState = useContext(RobotStateContext);
     const newList = JSON.parse(window.localStorage.getItem('robot'))||[]
+    const  {data} = props;
     useEffect(()=>{
         window.addEventListener('resize',()=>{
-            setDefaultHeight(document.documentElement.clientHeight-calcNum)
+            messageViewBox.current.scrollTop =  messageView.current.scrollHeight + 90;
         })
-       messageViewBox.current.scrollTop =  messageView.current.scrollHeight+20;
-    }) 
+      messageViewBox.current.scrollTop =  messageView.current.scrollHeight+90;
+    },[props])
         return(
-            <div className="robot-ctn" ref={messageViewBox} style={{'height':`${height}px`}} >
+            <div className="robot-ctn scrollHeight" ref={messageViewBox}>
+              
                 <ul className="" ref={messageView}>
+                    <li><Help></Help></li>
                     {
                         newList.map((item, index) => {
                                 return (
@@ -39,8 +35,8 @@ const RobotBox=(props)=>{
                         })
                     }
                     {
-                        RobotState.context.map((item,index) => {
-                           if(item.outputMessage=='...'){
+                       data.context.map((item,index) => {
+                           if( item && item.outputMessage=='...'){
                             return(
                                 <li className="dialogue-item" key={index}>
                                 <div className="guess-outer">

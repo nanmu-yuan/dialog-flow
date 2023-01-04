@@ -2,7 +2,7 @@ import './guestMessage.scss'
 const GuestMessage = (props)=>{
    const {output} = props;
    let outputContent ='';
-   if(output.outputMessage){
+   if(output.outputMessage !='...'){
     outputContent = output.outputMessage
    }else{
     outputContent = `

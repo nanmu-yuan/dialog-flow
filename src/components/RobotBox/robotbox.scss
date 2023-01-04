@@ -12,3 +12,11 @@
         padding-bottom: 30px;
     }
 }
+.scrollHeight{
+    height: calc(100vh - 300px);
+}
+@media (max-width:768px) {
+    .scrollHeight{
+        height: calc(100vh - 150px);
+    }
+}
