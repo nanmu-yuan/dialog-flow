@@ -36,28 +36,6 @@ export const CallBack =(data)=>{
                     "name": "projects/customer-370905/agent/sessions/1234567891/contexts/Site",
                     "lifespanCount": 2,
                     "parameters":{
-                        "siteName": siteName|| 'berrylook'
-                    }
-                }
-            ]
-        }
-    }
-    return axiosBase.post('https://dialogflow.googleapis.com/v2/projects/customer-370905/agent/sessions/*:detectIntent',params)
-}
-export const RobotCallBack =(data)=>{
-    const params ={
-        "queryInput":{
-            "text":{
-                "text":data,
-                "languageCode":"en-US"
-            }
-        },
-        "queryParams":{
-            "contexts":[
-                {
-                    "name": "projects/customer-370905/agent/sessions/1234567891/contexts/Site",
-                    "lifespanCount": 2,
-                    "parameters":{
                         "siteName": siteName
                     }
                 }
@@ -66,6 +44,7 @@ export const RobotCallBack =(data)=>{
     }
     return axiosBase.post('https://dialogflow.googleapis.com/v2/projects/customer-370905/agent/sessions/*:detectIntent',params)
 }
+
 export const getToken =()=>{
     return axiosBase.get('https://www.allindesk.com/cs/ggtoken',null)
 }
