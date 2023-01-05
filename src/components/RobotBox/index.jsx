@@ -9,7 +9,8 @@ import Help from "../Help";
 const RobotBox=(props)=>{
     const messageView = useRef(null);
     const messageViewBox = useRef(null);
-    const newList = JSON.parse(window.localStorage.getItem('robot'))||[]
+    const {siteName} = useContext(RobotStateContext)
+    const newList = JSON.parse(window.localStorage.getItem(siteName))||[]
     const  {data} = props;
     useEffect(()=>{
         window.addEventListener('resize',()=>{

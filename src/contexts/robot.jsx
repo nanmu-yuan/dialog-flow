@@ -5,8 +5,15 @@ export const RobotDispatchContext = createContext();
 
 const reducer = (state, action) => {
     switch(action.type){
+        case 'MODIFY_SITE_NAME':
+            return{
+                ...state,
+                siteName:action.payload
+
+            }
         case 'INPUT_TO_ROBOT':
             return{
+                ...state,
                 context:[{
                     outputMessage:'...',
                     inputMessage:action.payload
@@ -14,22 +21,23 @@ const reducer = (state, action) => {
             }
         case 'FROM_TO_ROBOT':
             const mes = {
+                ...state,
                 context:[{
                     ...state.context[0],
                     outputMessage:action.payload,
                 }],
           
             }
-
-            const cache = JSON.parse(window.localStorage.getItem('robot'));
+            const {siteName} = state;
+            const cache = JSON.parse(window.localStorage.getItem(siteName));
             if(cache){
                 const newList = cache.concat(mes.context);
-           
-                window.localStorage.setItem('robot',JSON.stringify(newList));
-               
+                if(newList.length>=20){
+                    
+                }
+                window.localStorage.setItem(siteName,JSON.stringify(newList));
             }else{
-                window.localStorage.setItem('robot',JSON.stringify(mes.context))
-              
+                window.localStorage.setItem(siteName,JSON.stringify(mes.context))
             }
             return mes
         default:
@@ -40,9 +48,18 @@ const reducer = (state, action) => {
 const RobotProvider = ({ children }) => {
     const initRobotData = {
         context:[],
+        siteName:''
 
     };
     const [state, dispatch] = useReducer(reducer, initRobotData);
+
+    useEffect(()=>{
+        const siteName = window.location.href.split("index/")[1];
+        dispatch({
+            type:'MODIFY_SITE_NAME',
+            payload:siteName
+        })
+    },[])
     return (
         <RobotDispatchContext.Provider value={dispatch}>
             <RobotStateContext.Provider value={state}>

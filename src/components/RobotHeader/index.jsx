@@ -6,7 +6,7 @@ const RobotHeader=()=>{
         name:''
     });
     useEffect(()=>{
-        const siteName = window.location.href.split("index/")[0]||"Customer";
+        const siteName = window.location.href.split("index/")[1]||"Customer";
         const name = siteName.slice(0,1).toUpperCase()
         setInfo((state)=>{
             return{
