@@ -50,6 +50,7 @@ const RobotFooter = () => {
                     <ul>
                         <li onClick={order}>Track order</li>
                         <li onClick={order}>Cancel order</li>
+                        <li onClick={order}>Staff Service</li>
                     </ul>
                 </div>
                 <div className="robot-search">
