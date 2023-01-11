@@ -52,9 +52,16 @@ const RobotProvider = ({ children }) => {
 
     };
     const [state, dispatch] = useReducer(reducer, initRobotData);
-
+    const cloudAndShoplazaCom = (data)=>{
+        const flag = data.indexOf("shoplaza_")>=0 || data.indexOf("Cloud_")>=0;
+        if(flag){
+            return data.split("shoplaza_")[1]?data.split("shoplaza_")[1]:data.split("Cloud_")[1]
+        }else{
+            return data
+        }
+}
     useEffect(()=>{
-        const siteName = window.location.href.split("index/")[1];
+        const siteName =cloudAndShoplazaCom(window.location.href.split("index/")[1].split("/")[0]);
         dispatch({
             type:'MODIFY_SITE_NAME',
             payload:siteName
