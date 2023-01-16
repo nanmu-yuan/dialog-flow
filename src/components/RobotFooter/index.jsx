@@ -30,6 +30,8 @@ const RobotFooter = () => {
     }
     const order = (e)=>{
         let mes = e.target.innerText;
+        let eventName = e.target.getAttribute('eventname');
+        window.gtag('event',eventName, {value:1});
         setTimeout(() => {
             inputToRobot(robotDispatch,mes)
         })
@@ -48,9 +50,9 @@ const RobotFooter = () => {
             <div className="robot-footer">
                 <div className="robot-associate">
                     <ul>
-                        <li onClick={order}>Track order</li>
-                        <li onClick={order}>Cancel order</li>
-                        <li onClick={order}>Staff Service</li>
+                        <li eventname="track_order" onClick={order}>Track order</li>
+                        <li eventname="cancel_order" onClick={order}>Cancel order</li>
+                        <li eventname="staff_service" onClick={order}>Staff Service</li>
                     </ul>
                 </div>
                 <div className="robot-search">
