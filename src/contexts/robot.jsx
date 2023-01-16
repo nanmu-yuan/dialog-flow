@@ -53,9 +53,10 @@ const RobotProvider = ({ children }) => {
     };
     const [state, dispatch] = useReducer(reducer, initRobotData);
     const cloudAndShoplazaCom = (data)=>{
-        const flag = data.indexOf("shoplaza_")>=0 || data.indexOf("Cloud_")>=0;
+        const _data = data.toLowerCase();
+        const flag = _data.indexOf("shoplaza_")>=0 || _data.indexOf("cloud_")>=0;
         if(flag){
-            return data.split("shoplaza_")[1]?data.split("shoplaza_")[1]:data.split("Cloud_")[1]
+            return _data.split("shoplaza_")[1]?_data.split("shoplaza_")[1]:_data.split("cloud_")[1]
         }else{
             return data
         }

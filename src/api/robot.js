@@ -2,14 +2,6 @@ import * as axiosBase from './index'
 
 const siteName = window.location.href.split("index/")[1].split("/")[0];
 const useEmail = window.location.href.split("index/")[1].split("/")[1];
-const cloudAndShoplazaCom = (data)=>{
-        const flag = data.indexOf("shoplaza_")>=0 || data.indexOf("Cloud_")>=0;
-        if(flag){
-            return data.split("shoplaza_")[1]?data.split("shoplaza_")[1]:data.split("Cloud_")[1]
-        }else{
-            return data
-        }
-}
 
 export const queryImagePath =(params)=>{
     params = params || {};
